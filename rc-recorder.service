@@ -1,0 +1,49 @@
+# systemd service unit for rc-recorder
+#
+# SETUP INSTRUCTIONS:
+#   1. Edit the fields marked with <CHANGE ME> below
+#   2. Copy this file:
+#        sudo cp rc-recorder.service /etc/systemd/system/
+#   3. Reload systemd and enable:
+#        sudo systemctl daemon-reload
+#        sudo systemctl enable rc-recorder
+#        sudo systemctl start rc-recorder
+#   4. Check status / logs:
+#        sudo systemctl status rc-recorder
+#        sudo journalctl -u rc-recorder -f
+
+[Unit]
+Description=RingCentral Recording Downloader
+# Start after the network is up
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+# --- CHANGE ME ---
+# The user account that should run the process (not root)
+User=ubuntu
+# Absolute path to the directory containing index.js
+WorkingDirectory=/home/ubuntu/rc-recorder
+# Absolute path to the node binary (find yours with: which node)
+ExecStart=/usr/bin/node /home/ubuntu/rc-recorder/index.js
+# -----------------
+
+# Load .env file so all environment variables are available
+EnvironmentFile=/home/ubuntu/rc-recorder/.env
+
+# Restart policy
+Restart=on-failure
+RestartSec=10s
+
+# Resource limits
+LimitNOFILE=65536
+
+# Log everything to the journal (view with: journalctl -u rc-recorder)
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=rc-recorder
+
+[Install]
+WantedBy=multi-user.target

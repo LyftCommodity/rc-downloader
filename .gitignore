@@ -1,0 +1,99 @@
+# =========================
+# Dependencies
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Lockfiles: usually COMMIT ONE of these for backend services.
+# If you want to commit package-lock.json (recommended), remove it from ignore.
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# =========================
+# Environment variables / secrets
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Runtime state (RingCentral integration)
+# Keep these out of git; mount a volume for them in Docker.
+# =========================
+token.enc
+ledger.json
+ledger.json.tmp
+webhook.json
+webhook.json.tmp
+
+# =========================
+# Downloaded recordings + temp files
+# (usually a host-mounted volume)
+# =========================
+downloads/
+*.tmp
+*.part
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# Local AI artifacts (sidecars)
+# =========================
+*.txt
+*.srt
+*.vtt
+*.transcript.json
+*.summary.json
+*.json.summary
+
+# =========================
+# Docker / Compose local overrides
+# =========================
+docker-compose.override.yml
+docker-compose.override.yaml
+compose.override.yml
+compose.override.yaml
+
+# Local environment files used by compose
+.env.docker
+.env.compose
+.env.local
+
+# Docker build tooling outputs
+**/.dockerignore.swp
+*.tar
+*.tgz
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.code-workspace
+
+# =========================
+# Coverage / build artifacts / caches
+# =========================
+coverage/
+dist/
+build/
+tmp/
+temp/
+.nyc_output/

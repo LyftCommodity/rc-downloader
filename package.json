@@ -1,0 +1,19 @@
+{
+  "name": "lyftcallsummary",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "sample.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@ringcentral/sdk": "^5.0.5",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "open": "^11.0.0"
+  },
+  "keywords": []
+}
