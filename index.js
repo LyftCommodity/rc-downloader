@@ -1,7 +1,34 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // RingCentral Recording Downloader
 // ─────────────────────────────────────────────────────────────────────────────
-
+//
+// Automatically downloads call recordings from RingCentral to ./downloads/
+// with rich filenames containing call metadata (timestamp, extension, direction,
+// caller/callee numbers, duration, recording type).
+//
+// FIRST TIME SETUP:
+//   1. Copy .env.example to .env and fill in your RC credentials
+//   2. Generate an encryption key and add it as TOKEN_ENCRYPTION_KEY:
+//        node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+//   3. node index.js
+//   4. Visit http://localhost:PORT/login and complete OAuth in the browser
+//   5. Visit http://localhost:PORT/recordings/backfill?days=90 to download history
+//
+// AFTER FIRST LOGIN the server re-authenticates automatically on restart.
+//
+// KEY ROUTES:
+//   /login                        First-time browser login
+//   /recordings/backfill?days=N   Download all recordings from the past N days
+//   /recordings/status            Live queue progress and ledger stats
+//   /health                       Returns 200 OK or 503 with issue details
+//   /webhook/register             Subscribe to real-time RC recording events
+//
+// NEW RECORDINGS are detected via RC webhook (preferred — requires a public
+// HTTPS URL set in WEBHOOK_RECEIVER_URL) or polling (fallback — set
+// POLL_INTERVAL_MS). Both can run simultaneously.
+//
+// See README.md for full setup, configuration options, and deployment guide.
+// ─────────────────────────────────────────────────────────────────────────────
 require("dotenv").config();
 
 const express       = require("express");
