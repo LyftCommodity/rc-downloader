@@ -16,7 +16,7 @@ RingCentral API
            Always looks back at least 24 hours to catch
            late-finalized recordings
 
-Downloads land in ./downloads/ with filenames like:
+Downloads land in ./downloads/ by default with filenames like:
 2026-01-28_14-30-00Z_ext102_inbound_from_15551234567_to_102_dur_04m32s_automatic_rec_8675309.mp3
 ```
 
@@ -35,7 +35,7 @@ The filename encodes everything your downstream AI needs to make assumptions bef
 ## Installation
 
 ```bash
-git clone <your-repo>
+git clone https://github.com/LyftCommodity/rc-recorder
 cd rc-recorder
 npm install
 cp .env.example .env
@@ -187,7 +187,7 @@ RingCentral → your-domain.com:443 → Windows Server → Node machine:3000
 
 ## Production deployment
 
-### PM2 (recommended for Node)
+### PM2 Process Manager to keep app live (for Node)
 
 ```bash
 npm install -g pm2
@@ -274,5 +274,3 @@ downloads/
 logs/
 node_modules/
 ```
-
-Commit `.env.example` (with keys but no values) so others know what to configure.
