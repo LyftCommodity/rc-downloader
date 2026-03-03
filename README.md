@@ -1,4 +1,4 @@
-# rc-recorder
+# rc-downloader
 
 A production-ready Node.js service that automatically downloads call recordings from RingCentral and saves them to a local folder with rich, descriptive filenames. Designed to feed a local AI pipeline that watches the downloads folder for transcription and summarisation.
 
