@@ -88,6 +88,7 @@ const {
   // any calls missed by the webhook (recording not ready within the 6s window)
   // are still caught. Default: 24 hours.
   POLL_LOOKBACK_MS = "86400000",
+  DOWNLOADS_DIR,
 } = process.env;
 
 if (!RC_SERVER_URL || !RC_CLIENT_ID || !RC_CLIENT_SECRET || !RC_REDIRECT_URI) {
@@ -117,7 +118,7 @@ const POLL_MS       = parseInt(POLL_INTERVAL_MS, 10) || 0;
 const POLL_LOOKBACK = parseInt(POLL_LOOKBACK_MS,  10) || 24 * 60 * 60 * 1000;
 
 // ── File paths ────────────────────────────────────────────────────────────────
-const DOWNLOADS_DIR = path.join(process.cwd(), "downloads");
+const DOWNLOADS_DIR = process.env.DOWNLOADS_DIR || path.join(process.cwd(), "downloads");
 const LEDGER_PATH   = path.join(process.cwd(), "ledger.json");
 const WEBHOOK_STORE = path.join(process.cwd(), "webhook.json");
 const TOKEN_PATH    = path.join(process.cwd(), "token.enc");
